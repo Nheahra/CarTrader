@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		876C8E54213EC03E008A1E53 /* VehicleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C8E53213EC03D008A1E53 /* VehicleGenerator.swift */; };
+		87A734CC2137627700101D47 /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A734CB2137627700101D47 /* SortOptionsViewController.swift */; };
 		87BE6F92211274B800EFC1FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE6F91211274B800EFC1FA /* AppDelegate.swift */; };
-		87BE6F94211274B800EFC1FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE6F93211274B800EFC1FA /* ViewController.swift */; };
+		87BE6F94211274B800EFC1FA /* VehicleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE6F93211274B800EFC1FA /* VehicleListViewController.swift */; };
 		87BE6F97211274B800EFC1FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87BE6F95211274B800EFC1FA /* Main.storyboard */; };
 		87BE6F99211274B900EFC1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87BE6F98211274B900EFC1FA /* Assets.xcassets */; };
 		87BE6F9C211274B900EFC1FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87BE6F9A211274B900EFC1FA /* LaunchScreen.storyboard */; };
@@ -34,9 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		876C8E53213EC03D008A1E53 /* VehicleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleGenerator.swift; sourceTree = "<group>"; };
+		87A734CB2137627700101D47 /* SortOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewController.swift; sourceTree = "<group>"; };
 		87BE6F8E211274B800EFC1FA /* CarTrader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarTrader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87BE6F91211274B800EFC1FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		87BE6F93211274B800EFC1FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		87BE6F93211274B800EFC1FA /* VehicleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleListViewController.swift; sourceTree = "<group>"; };
 		87BE6F96211274B800EFC1FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87BE6F98211274B900EFC1FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87BE6F9B211274B900EFC1FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,8 +102,10 @@
 			isa = PBXGroup;
 			children = (
 				87BE6F91211274B800EFC1FA /* AppDelegate.swift */,
-				87BE6F93211274B800EFC1FA /* ViewController.swift */,
+				87BE6F93211274B800EFC1FA /* VehicleListViewController.swift */,
 				87BE6F95211274B800EFC1FA /* Main.storyboard */,
+				876C8E53213EC03D008A1E53 /* VehicleGenerator.swift */,
+				87A734CB2137627700101D47 /* SortOptionsViewController.swift */,
 				87BE6F98211274B900EFC1FA /* Assets.xcassets */,
 				87BE6F9A211274B900EFC1FA /* LaunchScreen.storyboard */,
 				87BE6F9D211274B900EFC1FA /* Info.plist */,
@@ -256,7 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87BE6F94211274B800EFC1FA /* ViewController.swift in Sources */,
+				876C8E54213EC03E008A1E53 /* VehicleGenerator.swift in Sources */,
+				87A734CC2137627700101D47 /* SortOptionsViewController.swift in Sources */,
+				87BE6F94211274B800EFC1FA /* VehicleListViewController.swift in Sources */,
 				87BE6F92211274B800EFC1FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

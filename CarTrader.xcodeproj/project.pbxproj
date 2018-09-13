@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		876C8E54213EC03E008A1E53 /* VehicleGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876C8E53213EC03D008A1E53 /* VehicleGenerator.swift */; };
+		8787A2F22149E30E007AA24C /* FlatFilePersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8787A2F12149E30E007AA24C /* FlatFilePersistence.swift */; };
 		87A734CC2137627700101D47 /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A734CB2137627700101D47 /* SortOptionsViewController.swift */; };
 		87BE6F92211274B800EFC1FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE6F91211274B800EFC1FA /* AppDelegate.swift */; };
 		87BE6F94211274B800EFC1FA /* VehicleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BE6F93211274B800EFC1FA /* VehicleListViewController.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		876C8E53213EC03D008A1E53 /* VehicleGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VehicleGenerator.swift; sourceTree = "<group>"; };
+		8787A2F12149E30E007AA24C /* FlatFilePersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatFilePersistence.swift; sourceTree = "<group>"; };
 		87A734CB2137627700101D47 /* SortOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewController.swift; sourceTree = "<group>"; };
 		87BE6F8E211274B800EFC1FA /* CarTrader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarTrader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87BE6F91211274B800EFC1FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +80,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8787A2F32149E5B9007AA24C /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				8787A2F12149E30E007AA24C /* FlatFilePersistence.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		8787A2F42149E5C2007AA24C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				87BE6F93211274B800EFC1FA /* VehicleListViewController.swift */,
+				87A734CB2137627700101D47 /* SortOptionsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		87BE6F85211274B800EFC1FA = {
 			isa = PBXGroup;
 			children = (
@@ -102,13 +121,13 @@
 			isa = PBXGroup;
 			children = (
 				87BE6F91211274B800EFC1FA /* AppDelegate.swift */,
-				87BE6F93211274B800EFC1FA /* VehicleListViewController.swift */,
 				87BE6F95211274B800EFC1FA /* Main.storyboard */,
 				876C8E53213EC03D008A1E53 /* VehicleGenerator.swift */,
-				87A734CB2137627700101D47 /* SortOptionsViewController.swift */,
+				8787A2F42149E5C2007AA24C /* Controllers */,
 				87BE6F98211274B900EFC1FA /* Assets.xcassets */,
 				87BE6F9A211274B900EFC1FA /* LaunchScreen.storyboard */,
 				87BE6F9D211274B900EFC1FA /* Info.plist */,
+				8787A2F32149E5B9007AA24C /* Persistence */,
 			);
 			path = CarTrader;
 			sourceTree = "<group>";
@@ -262,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8787A2F22149E30E007AA24C /* FlatFilePersistence.swift in Sources */,
 				876C8E54213EC03E008A1E53 /* VehicleGenerator.swift in Sources */,
 				87A734CC2137627700101D47 /* SortOptionsViewController.swift in Sources */,
 				87BE6F94211274B800EFC1FA /* VehicleListViewController.swift in Sources */,

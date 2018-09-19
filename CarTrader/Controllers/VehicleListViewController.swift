@@ -1,87 +1,33 @@
 import UIKit
 
-class CarsModel {
-
-    var vehicles = [Vehicle]()
-    var selections: [Selection] = [
-        Selection(option: .aToZForMake, isChecked: false),
-        Selection(option: .aToZForModel, isChecked: false),
-        Selection(option: .oldestToNewest, isChecked: false),
-        Selection(option: .lowestToHighestInPrice, isChecked: false)
-    ]
-    var selectedIndex = 0
-
-    init() {
-        let generator = VehiclesGenerator()
-        self.vehicles = generator.vehicles
-    }
-    
-    func newSelection(at index: Int) {
-        selections[index].isChecked = !selections[index].isChecked
-        //use an index for the selections to figure out the mutable factor?
-        for selection in selections {
-            if selection.isChecked{
-//                this sorts everything with the right hierarchy(<- make this mutable? User should be able to list the hierarchy they want to sort by)...but will always sort EVERYTHING
-//                        vehicles.sort { (leftCar, rightCar) -> Bool in
-//                            return (leftCar.make, leftCar.model, leftCar.year, leftCar.price) < (rightCar.make, rightCar.model, rightCar.year, rightCar.price)
-//                            }
-                //this will not preserve the hierarchy, but will sort only the selection
-                switch selection.option {
-                    case .aToZForMake:
-                        vehicles.sort { (leftCar, rightCar) -> Bool in
-                            return leftCar.make < rightCar.make
-                        }
-                    case .aToZForModel:
-                        vehicles.sort { (leftCar, rightCar) -> Bool in
-                            return leftCar.model < rightCar.model
-                        }
-                    case .oldestToNewest:
-                        vehicles.sort { (leftCar, rightCar) -> Bool in
-                            return leftCar.year < rightCar.year
-                        }
-                    case .lowestToHighestInPrice:
-                        vehicles.sort { (leftCar, rightCar) -> Bool in
-                            return leftCar.price < rightCar.price
-                        }
-                }
-            }
-        }
-    }
-    
-}
-
 class CarsCell: UITableViewCell {
     
     @IBOutlet weak var makeLabel: UILabel!
     @IBOutlet weak var modelLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
-}
-
-class VehicleDetailViewController: UIViewController {
-    @IBOutlet weak var textView: UITextView!
-    var vehicle: Vehicle?
-    
-    func setVehicleData(with vehicle: Vehicle) {
-        self.vehicle = vehicle
-    }
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.textView.text = "id: \(String(describing: vehicle?.id)) | make: \(String(describing: vehicle?.make)) | model: \(String(describing: vehicle?.model)) | type: \(String(describing: vehicle?.type))"
-    }
+    @IBOutlet weak var priceLabel: UILabel!
 }
 
 class VehicleListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var model: CarsModel!
+    private let model = VehicleModel()
+    private let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        model = CarsModel()
+        model.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        searchController.searchBar.placeholder = "Search Vehicles"
+        definesPresentationContext = true
     }
     
     deinit {
@@ -90,49 +36,108 @@ class VehicleListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vehicleViewController = segue.destination as? VehicleDetailViewController {
-            vehicleViewController.vehicle = model.vehicles[model.selectedIndex]
+            vehicleViewController.vehicle = model.selectedVehicle
         } else if let optionsViewController = segue.destination as? SortOptionsViewController {
             optionsViewController.delegate = self
         }
         super.prepare(for: segue, sender: sender)
     }
+    lazy var priceFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        return formatter
+    }()
 }
-
-extension VehicleListViewController: SortOptionsViewControllerDelegate{
-    var selections: [Selection]{
+extension VehicleListViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+    }
+    func didPresentSearchController(_ searchController: UISearchController) {
+    }
+    func willDismissSearchController(_ searchController: UISearchController) {
+    }
+    func willPresentSearchController(_ searchController: UISearchController) {
+    }
+}
+extension VehicleListViewController: UISearchBarDelegate {
+    func searchBar(_ searchVar: UISearchBar, textDidChange searchText: String){
+    }
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    }
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    }
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        model.clearFilteredVehicles()
+    }
+}
+extension VehicleListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        if searchText.isEmpty {
+            model.clearFilteredVehicles()
+        } else {
+            model.filterVehiclesFor(searchText: searchText)
+        }
+    }
+}
+extension VehicleListViewController: VehicleModelDelegate {
+    var isFilerting: Bool {
+        let searchBarIsEmpty = searchController.searchBar.text?.isEmpty ?? true
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    func dataUpdated() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
+        }
+    }
+}
+extension VehicleListViewController: SortOptionsViewControllerDelegate {
+    var selections: [SortSelection] {
         return model.selections
     }
+    
     func newSelection(at index: Int) {
         model.newSelection(at: index)
-        tableView.reloadData()
+    }
+    
+    func moveSelection(at source: IndexPath, to destination: IndexPath) {
+        model.moveSelection(at: source, to: destination)
+    }
+    func selectionsCompleted() {
+        model.selectionsCompleted()
     }
 }
-
+extension VehicleListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Selected row \(indexPath)")
+        model.vehicleSelected(at: indexPath.row)
+        performSegue(withIdentifier: "showDetails", sender: self)
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 150
+    }
+}
 extension VehicleListViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.vehicles.count
+        return model.numberOfRows
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let vehicleCell = tableView.dequeueReusableCell(withIdentifier: "carsCell", for: indexPath) as? CarsCell else {
+        guard let vehicleCell = tableView.dequeueReusableCell(withIdentifier: "carsCell", for: indexPath) as? CarsCell, let vehicle = model.vehicle(at: indexPath.row) else {
             return UITableViewCell()
         }
-        let vehicle = model.vehicles[indexPath.row]
         vehicleCell.makeLabel.text = "Make: " + vehicle.make
         vehicleCell.modelLabel.text = "Model: " + vehicle.model
         vehicleCell.yearLabel.text = "Year: \(vehicle.year)"
+        let priceString = priceFormatter.string(from: vehicle.price as NSNumber) ?? String(vehicle.price)
+        vehicleCell.priceLabel.text = "Price: " + priceString
         return vehicleCell
-    }
-}
-
-extension VehicleListViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("User selected row: \(indexPath.row)")
-        model.selectedIndex = indexPath.row
-        performSegue(withIdentifier: "showDetails", sender: self)
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NbK-vA-Fbv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NbK-vA-Fbv">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,17 +29,21 @@
                                             <rect key="frame" x="0.0" y="0.0" width="336" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3m-Mf-CRg">
-                                                    <rect key="frame" x="27" y="12" width="288" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3m-Mf-CRg">
+                                                    <rect key="frame" x="30" y="12" width="283" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="C3m-Mf-CRg" secondAttribute="trailing" constant="15" id="484-Yd-ece"/>
+                                                <constraint firstItem="C3m-Mf-CRg" firstAttribute="top" secondItem="H9U-Ld-9Dp" secondAttribute="topMargin" constant="1" id="eQl-Nr-bEd"/>
+                                                <constraint firstItem="C3m-Mf-CRg" firstAttribute="leading" secondItem="H9U-Ld-9Dp" secondAttribute="leadingMargin" constant="15" id="kuF-XA-Zgr"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="descriptionLabel" destination="C3m-Mf-CRg" id="hl5-4L-HOu"/>
+                                            <outlet property="descriptionLabel" destination="C3m-Mf-CRg" id="hwL-zd-Ck4"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -174,7 +178,7 @@
                         <viewLayoutGuide key="safeArea" id="5bo-cA-FY0"/>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="kmy-hC-phh" id="Byu-RS-wBb"/>
+                        <outlet property="textView" destination="kmy-hC-phh" id="8pf-bc-oj2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTi-jV-L4K" userLabel="First Responder" sceneMemberID="firstResponder"/>
